@@ -15,6 +15,23 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            // tsc -p ./tsconfig.json
+            "type": "typescript",
+            "label": "tsc: build",
+            "tsconfig": "tsconfig.json",
+            "problemMatcher": [
+                "$tsc"
+            ],
+            // These options are passed to the tsc command. See https://go.microsoft.com/fwlink/?LinkId=733558
+            "options": {
+                "sourceMap": "inline"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

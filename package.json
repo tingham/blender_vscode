@@ -165,7 +165,8 @@
             "examples": [
               "auto",
               "./",
-              "./source"
+              "./source",
+              "./src"
             ],
             "description": "Directory that contains the source code of the addon (used for path mapping for the debugger)."
           },
@@ -257,6 +258,7 @@
     "vscode": "^1.1.21"
   },
   "dependencies": {
+    "glob": "^10.3.10",
     "request": "^2.87.0"
   },
   "extensionDependencies": [

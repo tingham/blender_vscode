@@ -2,7 +2,8 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import {
     getConfig, readTextFile, getWorkspaceFolders,
-    getSubfolders, executeTask, getAnyWorkspaceFolder, pathExists
+    executeTask, getAnyWorkspaceFolder, pathExists,
+    getSubFoldersRecursive
 } from './utils';
 
 // TODO: It would be superior to use custom AddonFolder interface that is not bound to the
@@ -116,8 +117,11 @@ export class AddonWorkspaceFolder {
 }
 
 async function tryFindActualAddonFolder(root: string) {
-    if (await folderContainsAddonEntry(root)) return root;
-    for (let folder of await getSubfolders(root)) {
+    if (await folderContainsAddonEntry(root)) {
+        return root;       
+    }
+    const folders = await getSubFoldersRecursive(root);
+    for (let folder of folders) {
         if (await folderContainsAddonEntry(folder)) {
             return folder;
         }

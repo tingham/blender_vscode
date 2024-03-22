@@ -47,7 +47,7 @@ export function handleErrors(func: () => Promise<void>) {
             await func();
         }
         catch (err) {
-            if (err.message !== CANCEL) {
+            if (err instanceof Error && err.message !== CANCEL) {
                 vscode.window.showErrorMessage(err.message);
             }
         }
@@ -127,6 +127,8 @@ export async function getSubfolders(root: string) {
                 reject(err);
                 return;
             }
+            
+            files = files.filter(f => f.charAt(0) !== '.');
 
             let folders = [];
             for (let name of files) {
@@ -139,6 +141,15 @@ export async function getSubfolders(root: string) {
             resolve(folders);
         });
     });
+}
+
+export async function getSubFoldersRecursive (root: string) {
+    let folders = [root];
+    let subfolders = await getSubfolders(root);
+    for (let folder of subfolders) {
+        folders = folders.concat(await getSubFoldersRecursive(folder));
+    }
+    return folders;
 }
 
 export async function isDirectory(filepath: string) {
