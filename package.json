@@ -2,7 +2,7 @@
   "name": "blender-development",
   "displayName": "Blender Development",
   "description": "Tools to simplify Blender development.",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "publisher": "JacquesLucke",
   "license": "MIT",
   "engines": {
@@ -141,6 +141,12 @@
             "scope": "resource",
             "default": false,
             "description": "Reload addon in Blender when a document is saved."
+          },
+          "blender.addon.justMyCode": {
+            "type": "boolean",
+            "scope": "resource",
+            "default": true,
+            "description": "If true, debug only the code in this addon. Otherwise, allow stepping into external python library code."
           },
           "blender.addon.buildTaskName": {
             "type": "string",
